@@ -1,0 +1,45 @@
+syntax = "proto3";
+option go_package = "/auth";
+
+message AuthData {
+  string address = 1;
+  string pasetoToken = 2;
+  int64 createdDate = 3;
+  int64 expireDate = 4;
+}
+
+message VerifyResponse {
+  repeated ResponseType status = 1;
+  AuthData auth = 2;
+}
+
+enum ResponseType {
+  SUCCESS = 0;
+  FAILED = 1;
+  EXPIRED_DATE = 2;
+}
+
+message CreateNewPasetoTokenRequest {
+  AuthData auth = 1;
+}
+
+message CreateNewPasetoTokenResponse {
+  AuthData auth = 1;
+}
+
+message VerifyPasetoTokenRequest {
+  string pasetoToken = 1;
+}
+
+message VerifyPasetoTokenResponse {
+  VerifyResponse status = 1;
+}
+
+
+// -> Func Define
+
+service AuthService {
+  rpc CreateAuth(CreateNewPasetoTokenRequest) returns (CreateNewPasetoTokenResponse); // 새로운 Auth Token 생성
+  rpc VerifyAuth(VerifyPasetoTokenRequest) returns(VerifyPasetoTokenResponse); // Auth Token 검증
+}
+

@@ -1,8 +1,9 @@
-package main
+package auth
 
 import (
-	"github.com/04Akaps/go-util/auth/client"
 	"os/exec"
+
+	"github.com/04Akaps/go-util/auth/client"
 )
 
 type Auth struct {
@@ -26,5 +27,4 @@ func NewAuth(serverUrl, clientUrl, pasetoKey string) (*Auth, error) {
 	} else {
 		return a, nil
 	}
-
 }

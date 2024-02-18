@@ -4,6 +4,7 @@ import (
 	"os/exec"
 
 	"github.com/04Akaps/go-util/auth/client"
+	"github.com/04Akaps/go-util/auth/server"
 )
 
 type Auth struct {
@@ -25,6 +26,7 @@ func NewAuth(serverUrl, clientUrl, pasetoKey string) (*Auth, error) {
 	} else if a.AuthGrpcClient, err = client.NewGrpcClient(clientUrl, pasetoKey); err != nil {
 		panic(err)
 	} else {
+		server.NewGrpcServer(serverUrl, pasetoKey)
 		return a, nil
 	}
 }

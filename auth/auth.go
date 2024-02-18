@@ -11,7 +11,7 @@ type Auth struct {
 	*client.AuthGrpcClient
 }
 
-func NewAuth(serverUrl, clientUrl, pasetoKey string, init bool) (*Auth, error) {
+func NewAuth(url, pasetoKey string, init bool) (*Auth, error) {
 	a := new(Auth)
 	var err error
 
@@ -28,10 +28,10 @@ func NewAuth(serverUrl, clientUrl, pasetoKey string, init bool) (*Auth, error) {
 		}
 	}
 
-	if a.AuthGrpcClient, err = client.NewGrpcClient(clientUrl, pasetoKey); err != nil {
+	if a.AuthGrpcClient, err = client.NewGrpcClient(url, pasetoKey); err != nil {
 		panic(err)
 	} else {
-		server.NewGrpcServer(serverUrl, pasetoKey)
+		server.NewGrpcServer(url, pasetoKey)
 		return a, nil
 	}
 }

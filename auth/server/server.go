@@ -3,14 +3,15 @@ package server
 import (
 	"context"
 	"errors"
+	"log"
+	"net"
+	"time"
+
 	"github.com/04Akaps/go-util/auth/paseto"
 	auth "github.com/04Akaps/go-util/auth/proto"
 	"github.com/04Akaps/go-util/types"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	"log"
-	"net"
-	"time"
 )
 
 type AuthGrpcServer struct {
@@ -40,7 +41,6 @@ func NewGrpcServer(url, pasetoKey string) error {
 
 		return nil
 	}
-
 }
 
 func (a *AuthGrpcServer) CreateAuth(_ context.Context, req *auth.CreateNewPasetoTokenRequest) (*auth.CreateNewPasetoTokenResponse, error) {

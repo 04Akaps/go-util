@@ -23,8 +23,6 @@ func SetLog(p string) *Log {
 			if f, err = os.Create(p); err != nil {
 				panic(err)
 			}
-		} else {
-			panic(err)
 		}
 
 		l.LogFile = f

@@ -32,21 +32,33 @@ func SetLog(p string) *Log {
 	}
 }
 
-func (l *Log) InfoLog(w string) {
-	msg := "[INFO] " + w
+func (l *Log) InfoLog(w ...string) {
+	msg := makeMsg("[INFO] ", w)
+
 	fmt.Println(msg)
 	log.Printf(msg)
 }
 
-func (l *Log) ErrLog(w string) {
-	msg := "[ERR] " + w
+func (l *Log) ErrLog(w ...string) {
+	msg := makeMsg("[ERR] ", w)
+
 	fmt.Println(msg)
 	log.Printf(msg)
 }
 
-func (l *Log) CritLog(w string) {
-	msg := "[Crit] " + w
+func (l *Log) CritLog(w ...string) {
+	msg := makeMsg("[CRIT] ", w)
 	fmt.Println(msg)
 	log.Printf(msg)
 	panic(w)
+}
+
+func makeMsg(status string, w []string) string {
+	msg := status
+
+	for _, v := range w {
+		msg += fmt.Sprintf(" %v", v)
+	}
+
+	return msg
 }
